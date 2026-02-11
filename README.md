@@ -1,7 +1,9 @@
 ## Running Your Tests
-`dotnet test`  - This runs all tests
-`HEADED=1 dotnet test` - This runs all tests with browser open
-`dotnet test --filter [testfilename]` - This runs a specified test
+* `dotnet test`  - This runs all tests. 
+
+* `HEADED=1 dotnet test` - This runs all tests with browser open. 
+
+* `dotnet test --filter [testfilename]` - This runs a specified test. 
 
 ## Code Gen
 ```
