@@ -5,7 +5,6 @@ namespace SauceDemoTests.Pages;
 public class LoginPage(IPage page)
 {
     private readonly IPage _page = page;
-    private readonly string URL = "https://www.saucedemo.com/";
     private readonly string UsernameLocator = "#user-name";
     private readonly string PasswordLocator = "#password"; 
     private readonly string LoginBtnLocator = "#login-button";
@@ -13,7 +12,7 @@ public class LoginPage(IPage page)
 
         public async Task GoToLoginPage()
         {
-            await _page.GotoAsync(URL);
+            await _page.GotoAsync(Config.BaseUrl);
         }   
         public async Task<ProductsPage> Login(string username, string password)
         {
