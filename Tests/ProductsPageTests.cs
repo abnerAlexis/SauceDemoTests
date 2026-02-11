@@ -10,7 +10,7 @@ public class ProductsPageTests : PageTest
     {
         await Page.GotoAsync(Config.BaseUrl);
         var loginPage = new LoginPage(Page);
-        var productsPage = await loginPage.Login(Config.StandardUser, Config.Password);
+        await loginPage.Login(Config.StandardUser, Config.Password);
         await Page.WaitForURLAsync("**/inventory.html");
         var page = new ProductsPage(Page);
         var titleText = await page.GetTitleText();
@@ -22,7 +22,7 @@ public class ProductsPageTests : PageTest
     {
         await Page.GotoAsync(Config.BaseUrl);
         var loginPage = new LoginPage(Page);
-        var productsPage = await loginPage.Login(Config.StandardUser, Config.Password);
+        await loginPage.Login(Config.StandardUser, Config.Password);
         await Page.WaitForURLAsync("**/inventory.html");
         var shoppingCartIcon = Page.Locator(".shopping_cart_link");
         await Expect(shoppingCartIcon).ToBeVisibleAsync();
