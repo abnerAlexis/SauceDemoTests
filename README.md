@@ -32,3 +32,17 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/abnerAlexis/test.git
 git push -u origin main. 
+```
+### After updating your project;
+```bash
+git status
+```
+```bash
+git add . //or git add filename
+```
+```bash
+git commit -m "Short and meaningful message"
+```
+```bash
+git push -u origin main
+```
