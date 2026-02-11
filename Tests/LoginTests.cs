@@ -1,5 +1,4 @@
 ﻿using Microsoft.Playwright.NUnit;
-using Microsoft.VisualBasic;
 using SauceDemoTests.Pages;
 
 namespace SauceDemoTests.Tests;
@@ -23,10 +22,9 @@ public class LoginTests : PageTest
 
         var title = Page.Locator(".title");
         await Expect(title).ToHaveTextAsync("Products");
-
+    
         // await Page.PauseAsync();
         // Assert.Pass();
-
     }
 
     [Test]
@@ -36,6 +34,6 @@ public class LoginTests : PageTest
         await page.Login("locked_out_user", "secret_sauce");
         var errorMessage = Page.Locator("[data-test=\'error\']");
         await Expect(errorMessage).ToHaveTextAsync("Epic sadface: Sorry, this user has been locked out.");
-        await Page.PauseAsync();
+        // await Page.PauseAsync();
     }
 }

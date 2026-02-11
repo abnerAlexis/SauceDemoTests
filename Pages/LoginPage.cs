@@ -15,11 +15,12 @@ public class LoginPage(IPage page)
         {
             await _page.GotoAsync(URL);
         }   
-        public async Task Login(string username, string password)
+        public async Task<ProductsPage> Login(string username, string password)
         {
             await _page.FillAsync(UsernameLocator, username);
             await _page.FillAsync(PasswordLocator, password);
-            await _page.ClickAsync(LoginBtnLocator);          
+            await _page.ClickAsync(LoginBtnLocator);     
+            return new ProductsPage(_page);     
         }
 
     }
