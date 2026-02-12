@@ -10,7 +10,7 @@ public class LoginTests : PageTest
     {
         var page = new LoginPage(Page);
         await page.GoToLoginPage();
-        await Expect(Page).ToHaveURLAsync("https://www.saucedemo.com/");
+        await Expect(Page).ToHaveURLAsync(Config.BaseUrl);
     }
 
     [Test]

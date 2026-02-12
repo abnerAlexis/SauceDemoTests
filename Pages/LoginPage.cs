@@ -2,24 +2,30 @@ using Microsoft.Playwright;
 
 namespace SauceDemoTests.Pages;
 
-public class LoginPage(IPage page)
+public class LoginPage
 {
-    private readonly IPage _page = page;
-    private readonly string UsernameLocator = "#user-name";
-    private readonly string PasswordLocator = "#password"; 
-    private readonly string LoginBtnLocator = "#login-button";
+    private readonly IPage _page;
+    private readonly ILocator UsernameLocator;
+    private readonly ILocator PasswordLocator;
+    private readonly ILocator LoginBtnLocator;
 
+
+    public LoginPage(IPage page)
+    {
+        _page = page;
+        UsernameLocator = _page.Locator("#user-name");
+        PasswordLocator = _page.Locator("#password");
+        LoginBtnLocator = _page.Locator("#login-button");
+    }
 
         public async Task GoToLoginPage()
         {
             await _page.GotoAsync(Config.BaseUrl);
         }   
-        public async Task<ProductsPage> Login(string username, string password)
+        public async Task Login(string username, string password)
         {
-            await _page.FillAsync(UsernameLocator, username);
-            await _page.FillAsync(PasswordLocator, password);
-            await _page.ClickAsync(LoginBtnLocator);     
-            return new ProductsPage(_page);     
+            await UsernameLocator.FillAsync(username);
+            await PasswordLocator.FillAsync(password);
+            await LoginBtnLocator.ClickAsync();
         }
-
     }
