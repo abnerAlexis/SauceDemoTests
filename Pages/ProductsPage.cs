@@ -1,5 +1,4 @@
 using Microsoft.Playwright;
-using SauceDemoTests.Tests;
 
 namespace SauceDemoTests.Pages;
 
