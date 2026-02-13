@@ -4,13 +4,18 @@ namespace SauceDemoTests.Tests;
 
 public class ProductsPageTests : PageTest
 {
-    [Test]
-    public async Task VerifyProductsPageTitle()
+    [SetUp]
+    public async Task Setup()
     {
         await Page.GotoAsync(Config.BaseUrl);
         var loginPage = new LoginPage(Page);
         await loginPage.Login(Config.StandardUser, Config.Password);
         await Page.WaitForURLAsync("**/inventory.html");
+    }
+
+    [Test]
+    public async Task VerifyProductsPageTitle()
+    {
         var page = new ProductsPage(Page);
         var titleText = await page.GetTitleText();
         Assert.That(titleText, Is.EqualTo("Products"));
@@ -19,10 +24,6 @@ public class ProductsPageTests : PageTest
     [Test]
     public async Task VerifyShoppingCartIconIsVisible()
     {
-        await Page.GotoAsync(Config.BaseUrl);
-        var loginPage = new LoginPage(Page);
-        await loginPage.Login(Config.StandardUser, Config.Password);
-        await Page.WaitForURLAsync("**/inventory.html");
         var shoppingCartIcon = Page.Locator(".shopping_cart_link");
         await Expect(shoppingCartIcon).ToBeVisibleAsync();
     }
@@ -30,10 +31,6 @@ public class ProductsPageTests : PageTest
     [Test]
     public async Task VerifyItemsAreDisplayed()
     {
-        await Page.GotoAsync(Config.BaseUrl);
-        var loginPage = new LoginPage(Page);
-        await loginPage.Login(Config.StandardUser, Config.Password);
-        await Page.WaitForURLAsync("**/inventory.html");
         var productsPage = new ProductsPage(Page);
         await productsPage.GetInventoryItemsCount();
         int ItemCount = await productsPage.GetInventoryItemsCount();
@@ -43,13 +40,18 @@ public class ProductsPageTests : PageTest
     [Test]
     public async Task ClickShoppingCartIconTest()
     {
-        await Page.GotoAsync(Config.BaseUrl);
-        var loginPage = new LoginPage(Page);
-        await loginPage.Login(Config.StandardUser, Config.Password);
-        await Page.WaitForURLAsync("**/inventory.html");
         var productsPage = new ProductsPage(Page);
         await productsPage.ClickShoppingCartIcon();
         await Page.WaitForURLAsync(Config.BaseUrl + "cart.html");
         await Expect(Page).ToHaveURLAsync(Config.BaseUrl + "cart.html");
+    }
+
+    [Test]
+    public async Task AddItemToCartTest()
+    {
+        var productsPage = new ProductsPage(Page);
+        await productsPage.AddItemToCart("sauce-labs-backpack");
+        var cartBadge = Page.Locator(".shopping_cart_badge");
+        await Expect(cartBadge).ToHaveTextAsync("1");   
     }
 }

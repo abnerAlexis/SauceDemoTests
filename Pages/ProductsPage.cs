@@ -28,6 +28,12 @@ public class ProductsPage
         return await inventoryItems.CountAsync();
     }
 
+    public async Task AddItemToCart(string item)
+    {
+        var addToCartButton = _page.Locator($"button[data-test='add-to-cart-{item}']");
+        await addToCartButton.ClickAsync();
+    }
+
      public async Task ClickShoppingCartIcon()
     {
         var shoppingCartIcon = ShoppingCartLink;
